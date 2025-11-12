@@ -128,7 +128,7 @@ const Portfolio = () => {
 
   const openModal = (projectIndex: number) => {
     setCurrentProjectIndex(projectIndex);
-    setCurrentImageIndex(0); // Start from first image of the project
+    setCurrentImageIndex(0);
     setIsModalOpen(true);
   };
 
