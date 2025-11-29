@@ -8,12 +8,20 @@ import {
   Linkedin,
   Mail,
   ExternalLink,
-  ChevronDown,
   Eye,
   ChevronLeft,
   ChevronRight,
+  Gitlab,
 } from "lucide-react";
 import Image from "next/image";
+import ThreeBackground from "./components/ThreeBackground";
+import AnimatedText from "./components/AnimatedText";
+import ScrollAnimations from "./components/ScrollAnimations";
+import MagneticButton from "./components/MagneticButton";
+import AnimatedCard from "./components/AnimatedCard";
+// import CustomCursor from "./components/CustomCursor";
+import PageLoader from "./components/PageLoader";
+// import SmoothScroll from "./components/SmoothScroll";
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -115,6 +123,13 @@ const Portfolio = () => {
       description:
         "Berkolaborasi dalam pengembangan website",
     },
+    {
+      role: "Mobile Developer",
+      company: "Hydrate App",
+      period: "Februari 2025 - Juni 2024",
+      description:
+        "Mengembangkan aplikasi mobile Flutter untuk pemantauan konsumsi air harian",
+    }
   ];
 
   const scrollToSection = (id: string) => {
@@ -168,6 +183,11 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+      <PageLoader />
+      {/* <CustomCursor /> */}
+      {/* <SmoothScroll /> */}
+      <ThreeBackground />
+      <ScrollAnimations />
       {/* Navigation */}
       <nav
         className={`fixed w-full z-50 transition-all duration-300 ${
@@ -232,109 +252,140 @@ const Portfolio = () => {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex items-center justify-center px-4"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32"
       >
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8 animate-fade-in">
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-linear-to-r from-purple-400 to-pink-600 p-1">
-              <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-6xl">
-                👨‍💻
+        <div className="max-w-5xl mx-auto text-center w-full">
+          {/* Profile Image */}
+          <div className="mb-4 sm:mb-5 animate-fade-in">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto rounded-full bg-linear-to-r from-purple-400 via-pink-500 to-purple-600 p-1 shadow-2xl shadow-purple-500/30">
+              <div className="w-full h-full rounded-full overflow-hidden">
+                <Image
+                  src="/diri/hilmi1.jpg"
+                  alt="Mohammad Hilmi Afifi"
+                  width={192}
+                  height={192}
+                  className="w-full h-full object-cover"
+                  priority
+                />
               </div>
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-linear-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
-            Mohammad Hilmi Afifi
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Frontend Developer | Mobile Developer | ReactJs & Flutter Specialist
-          </p>
-          <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
-            Membuat solusi digital yang inovatif dengan fokus pada performa,
-            user experience, dan clean code architecture
-          </p>
+          {/* Name */}
+          <AnimatedText
+            text="Mohammad Hilmi Afifi"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 bg-linear-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent leading-tight px-2"
+            delay={0.2}
+          />
 
-          <div className="flex justify-center gap-4 mb-12">
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="px-8 py-3 bg-linear-to-r from-purple-500 to-pink-600 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+          {/* Role */}
+          <AnimatedText
+            text="Frontend Developer | Mobile Developer"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-2 sm:mb-3"
+            delay={0.5}
+          />
+          <AnimatedText
+            text="ReactJs & Flutter Specialist"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-purple-400 font-medium mb-6 sm:mb-8"
+            delay={0.6}
+          />
+
+          {/* Description */}
+          <AnimatedText
+            text="Membuat solusi digital yang inovatif dengan fokus pada performa, user experience, dan clean code architecture"
+            className="text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 max-w-xl sm:max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
+            delay={0.8}
+          />
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 px-4 sm:px-0">
+            <MagneticButton
+              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-linear-to-r from-purple-500 to-pink-600 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all font-medium text-sm sm:text-base"
+              strength={0.4}
             >
-              Lihat Projects
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="px-8 py-3 border-2 border-purple-500 rounded-full hover:bg-purple-500/10 transition-all"
+              <span onClick={() => scrollToSection("projects")}>Lihat Projects</span>
+            </MagneticButton>
+            <MagneticButton
+              className="px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-purple-500 rounded-full hover:bg-purple-500/20 transition-all font-medium text-sm sm:text-base"
+              strength={0.4}
             >
-              Contact Me
-            </button>
+              <span onClick={() => scrollToSection("contact")}>Contact Me</span>
+            </MagneticButton>
           </div>
 
-          <div className="flex justify-center gap-6">
-            <a href="#" className="hover:text-purple-400 transition-colors">
-              <Github size={24} />
+          {/* Social Links */}
+          <div className="flex justify-center gap-4 sm:gap-5">
+            <a 
+              href="https://gitlab.com/HilmiAfifi" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 sm:p-3 rounded-full bg-slate-800/50 hover:bg-purple-500/20 hover:text-purple-400 transition-all"
+            >
+              <Gitlab className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
-            <a href="#" className="hover:text-purple-400 transition-colors">
-              <Linkedin size={24} />
+            <a 
+              href="https://www.linkedin.com/in/mohammad-hilmi-afifi-464949342/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 sm:p-3 rounded-full bg-slate-800/50 hover:bg-purple-500/20 hover:text-purple-400 transition-all"
+            >
+              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
-            <a href="#" className="hover:text-purple-400 transition-colors">
-              <Mail size={24} />
+            <a 
+              href="mailto:hilmiafifi65@gmail.com" 
+              className="p-2.5 sm:p-3 rounded-full bg-slate-800/50 hover:bg-purple-500/20 hover:text-purple-400 transition-all"
+            >
+              <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </div>
-
-          <button
-            onClick={() => scrollToSection("about")}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-          >
-            <ChevronDown size={32} />
-          </button>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen flex items-center px-4 py-20">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+      <section id="about" className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto w-full">
+          <h2 className="section-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center">
             Tentang{" "}
             <span className="bg-linear-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
               Saya
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <p className="text-lg text-gray-300 mb-6">
+              <p className="text-base sm:text-lg text-gray-300 mb-4 sm:mb-6">
                 Saya adalah seorang Frontend Developer dan Mobile Developer dengan 1+ tahun
                 pengalaman dalam membangun website dan applications yang scalable dan
                 user-friendly. Passion saya adalah menciptakan solusi digital
                 yang tidak hanya terlihat bagus, tetapi juga memberikan nilai
                 nyata kepada users.
               </p>
-              <p className="text-lg text-gray-300 mb-6">
+              <p className="text-base sm:text-lg text-gray-300 mb-4 sm:mb-6">
                 Spesialisasi saya adalah dalam React ecosystem, terutama Next.js
                 untuk production-grade applications. Saya juga memiliki
                 pengalaman yang kuat dalam Mobile development dengan Flutter.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-base sm:text-lg text-gray-300">
                 Saat ini saya fokus pada pengembangan website dan aplikasi dengan clean
                 architecture, best practices, dan modern development workflows.
               </p>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-4">Pengalaman</h3>
+            <div className="space-y-4 sm:space-y-6">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Pengalaman</h3>
               {experiences.map((exp, index) => (
-                <div
+                <AnimatedCard
                   key={index}
-                  className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-lg border border-slate-700 hover:border-purple-500 transition-colors"
+                  className="bg-slate-800/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-slate-700 hover:border-purple-500 transition-colors"
                 >
-                  <h4 className="text-xl font-semibold text-purple-400">
+                  <h4 className="text-lg sm:text-xl font-semibold text-purple-400">
                     {exp.role}
                   </h4>
-                  <p className="text-gray-400 mb-2">
+                  <p className="text-sm sm:text-base text-gray-400 mb-2">
                     {exp.company} | {exp.period}
                   </p>
-                  <p className="text-gray-300">{exp.description}</p>
-                </div>
+                  <p className="text-sm sm:text-base text-gray-300">{exp.description}</p>
+                </AnimatedCard>
               ))}
             </div>
           </div>
@@ -342,22 +393,22 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen px-4 py-20">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+      <section id="projects" className="min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto w-full">
+          <h2 className="section-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center">
             Featured{" "}
             <span className="bg-linear-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {projects.map((project, index) => (
-              <div
+              <AnimatedCard
                 key={index}
-                className="bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 hover:border-purple-500 transition-all hover:transform hover:scale-105"
+                className="project-card bg-slate-800/50 backdrop-blur-sm rounded-lg sm:rounded-xl overflow-hidden border border-slate-700 hover:border-purple-500 transition-all"
               >
-                <div className="h-48 overflow-hidden relative group">
+                <div className="h-40 sm:h-48 overflow-hidden relative group">
                   <Image
                     width={800}
                     height={500}
@@ -375,16 +426,16 @@ const Portfolio = () => {
                     </button>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <p className="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4 line-clamp-3">{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                     {project.tech.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm"
+                        className="px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs sm:text-sm"
                       >
                         {tech}
                       </span>
@@ -392,12 +443,14 @@ const Portfolio = () => {
                   </div>
                   <a
                     href={project.link}
-                    className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm sm:text-base text-purple-400 hover:text-purple-300"
                   >
-                    View Project <ExternalLink size={16} />
+                    View Project <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -406,34 +459,34 @@ const Portfolio = () => {
       {/* Skills Section */}
       <section
         id="skills"
-        className="min-h-screen flex items-center px-4 py-20"
+        className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
       >
         <div className="max-w-6xl mx-auto w-full">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+          <h2 className="section-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center">
             Technical{" "}
             <span className="bg-linear-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
               Skills
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {Object.entries(skills).map(([category, items]) => (
-              <div
+              <AnimatedCard
                 key={category}
-                className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors"
+                className="skill-card bg-slate-800/50 backdrop-blur-sm p-5 sm:p-6 lg:p-8 rounded-lg sm:rounded-xl border border-slate-700 hover:border-purple-500 transition-colors"
               >
-                <h3 className="text-2xl font-semibold mb-6 text-purple-400">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-purple-400">
                   {category}
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {items.map((skill, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-linear-to-r from-purple-400 to-pink-600 rounded-full"></div>
-                      <span className="text-gray-300">{skill}</span>
+                    <div key={index} className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-linear-to-r from-purple-400 to-pink-600 rounded-full shrink-0"></div>
+                      <span className="text-sm sm:text-base text-gray-300">{skill}</span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -442,97 +495,94 @@ const Portfolio = () => {
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex items-center px-4 py-20"
+        className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
       >
         <div className="max-w-4xl mx-auto w-full text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="section-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
             Mari{" "}
             <span className="bg-linear-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
               Berkolaborasi
             </span>
           </h2>
-          <p className="text-xl text-gray-300 mb-12">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-12 px-4 sm:px-0">
             Saya terbuka untuk peluang kerja baru dan project menarik. Mari
             berdiskusi bagaimana saya bisa membantu project Anda!
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <a
-              href="mailto:your@email.com"
-              className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-all hover:transform hover:scale-105"
-            >
-              <Mail className="mx-auto mb-3 text-purple-400" size={32} />
-              <h3 className="font-semibold mb-2">Email</h3>
-              <p className="text-gray-400">hilmiafifi64@gmail.com</p>
-            </a>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            <AnimatedCard className="bg-slate-800/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg sm:rounded-xl border border-slate-700 hover:border-purple-500 transition-all">
+              <a href="mailto:hilmiafifi64@gmail.com" className="block">
+                <Mail className="mx-auto mb-2 sm:mb-3 text-purple-400 w-6 h-6 sm:w-8 sm:h-8" />
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Email</h3>
+                <p className="text-gray-400 text-xs sm:text-sm break-all">hilmiafifi64@gmail.com</p>
+              </a>
+            </AnimatedCard>
 
-            <a
-              href="#"
-              className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-all hover:transform hover:scale-105"
-            >
-              <Github className="mx-auto mb-3 text-purple-400" size={32} />
-              <h3 className="font-semibold mb-2">GitHub</h3>
-              <p className="text-gray-400">HilmiAfifi24</p>
-            </a>
+            <AnimatedCard className="bg-slate-800/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg sm:rounded-xl border border-slate-700 hover:border-purple-500 transition-all">
+              <a href="https://github.com/HilmiAfifi24" target="_blank" rel="noopener noreferrer" className="block">
+                <Github className="mx-auto mb-2 sm:mb-3 text-purple-400 w-6 h-6 sm:w-8 sm:h-8" />
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">GitHub</h3>
+                <p className="text-gray-400 text-xs sm:text-sm">HilmiAfifi24</p>
+              </a>
+            </AnimatedCard>
 
-            <a
-              href="#"
-              className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-all hover:transform hover:scale-105"
-            >
-              <Linkedin className="mx-auto mb-3 text-purple-400" size={32} />
-              <h3 className="font-semibold mb-2">LinkedIn</h3>
-              <p className="text-gray-400">Mohammad Hilmi Afifi</p>
-            </a>
+            <AnimatedCard className="bg-slate-800/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg sm:rounded-xl border border-slate-700 hover:border-purple-500 transition-all sm:col-span-2 md:col-span-1">
+              <a href="https://www.linkedin.com/in/mohammad-hilmi-afifi-464949342/" target="_blank" rel="noopener noreferrer" className="block">
+                <Linkedin className="mx-auto mb-2 sm:mb-3 text-purple-400 w-6 h-6 sm:w-8 sm:h-8" />
+                <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">LinkedIn</h3>
+                <p className="text-gray-400 text-xs sm:text-sm">Mohammad Hilmi Afifi</p>
+              </a>
+            </AnimatedCard>
           </div>
 
-          <a
-            href="mailto:your@email.com"
-            className="inline-block px-12 py-4 bg-linear-to-r from-purple-500 to-pink-600 rounded-full text-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+          <MagneticButton
+            className="inline-block px-8 sm:px-12 py-3 sm:py-4 bg-linear-to-r from-purple-500 to-pink-600 rounded-full text-base sm:text-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+            strength={0.5}
           >
-            Get In Touch
-          </a>
+            <a href="mailto:hilmiafifi64@gmail.com">Get In Touch</a>
+          </MagneticButton>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center text-gray-400">
-          <p>© 2025 Mohammad Hilmi Afifi. Built with NextJs & Tailwind CSS</p>
+      <footer className="border-t border-slate-800 py-6 sm:py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+          <p className="text-sm sm:text-base">© 2025 Mohammad Hilmi Afifi. Built with NextJs & Tailwind CSS</p>
         </div>
       </footer>
 
       {/* Image Modal Lightbox */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-sm">
+        <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-sm p-2 sm:p-4">
           {/* Close Button */}
           <button
             onClick={closeModal}
-            className="absolute top-4 right-4 text-white hover:text-purple-400 transition-colors z-10"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white hover:text-purple-400 transition-colors z-10"
           >
-            <X size={32} />
+            <X className="w-6 h-6 sm:w-8 sm:h-8" />
           </button>
 
           {/* Previous Button */}
           <button
             onClick={prevImage}
-            className="absolute left-4 text-white hover:text-purple-400 transition-colors z-10 bg-slate-800/50 p-3 rounded-full hover:bg-slate-700/50"
+            className="absolute left-1 sm:left-4 text-white hover:text-purple-400 transition-colors z-10 bg-slate-800/50 p-2 sm:p-3 rounded-full hover:bg-slate-700/50"
           >
-            <ChevronLeft size={32} />
+            <ChevronLeft className="w-5 h-5 sm:w-8 sm:h-8" />
           </button>
 
           {/* Next Button */}
           <button
             onClick={nextImage}
-            className="absolute right-4 text-white hover:text-purple-400 transition-colors z-10 bg-slate-800/50 p-3 rounded-full hover:bg-slate-700/50"
+            className="absolute right-1 sm:right-4 text-white hover:text-purple-400 transition-colors z-10 bg-slate-800/50 p-2 sm:p-3 rounded-full hover:bg-slate-700/50"
           >
-            <ChevronRight size={32} />
+            <ChevronRight className="w-5 h-5 sm:w-8 sm:h-8" />
           </button>
 
           {/* Modal Content */}
-          <div className="max-w-6xl max-h-[90vh] w-full mx-4">
+          <div className="max-w-6xl max-h-[95vh] sm:max-h-[90vh] w-full mx-2 sm:mx-4">
             <div className="bg-slate-900 rounded-lg overflow-hidden">
               {/* Image */}
-              <div className="relative h-[60vh] flex items-center justify-center bg-slate-950">
+              <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center justify-center bg-slate-950">
                 <Image
                   width={1200}
                   height={800}
@@ -543,18 +593,18 @@ const Portfolio = () => {
               </div>
 
               {/* Project Info */}
-              <div className="p-6 border-t border-slate-700">
-                <h3 className="text-2xl font-bold mb-2 text-white">
+              <div className="p-4 sm:p-6 border-t border-slate-700">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-white">
                   {projects[currentProjectIndex].title}
                 </h3>
-                <p className="text-gray-400 mb-4">
+                <p className="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">
                   {projects[currentProjectIndex].description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                   {projects[currentProjectIndex].tech.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm"
+                      className="px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs sm:text-sm"
                     >
                       {tech}
                     </span>
@@ -564,14 +614,14 @@ const Portfolio = () => {
                   href={projects[currentProjectIndex].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300"
+                  className="inline-flex items-center gap-2 text-sm sm:text-base text-purple-400 hover:text-purple-300"
                 >
-                  View Project <ExternalLink size={16} />
+                  View Project <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
 
               {/* Image Counter */}
-              <div className="px-6 pb-4 text-center text-gray-400">
+              <div className="px-4 sm:px-6 pb-3 sm:pb-4 text-center text-gray-400 text-sm sm:text-base">
                 <span>
                   {currentImageIndex + 1} / {projects[currentProjectIndex].images.length}
                 </span>
